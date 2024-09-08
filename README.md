@@ -10,7 +10,8 @@ gleam add glidicon
 import glidicon
 
 pub fn main() {
-  // TODO: An example of the project in use
+  let image = glidicon.create("gleam") |> glidicon.image
+  // Enjoy your Identicon.
 }
 ```
 
