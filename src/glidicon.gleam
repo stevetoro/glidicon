@@ -102,5 +102,7 @@ fn draw_image(diagonals: List(#(#(Int, Int), #(Int, Int))), color: RGB) {
     egd.filled_rectangle(image, top_left, bottom_right, fill_color)
   })
 
-  egd.render(image)
+  let binary = egd.render(image)
+  egd.destroy(image)
+  binary
 }
