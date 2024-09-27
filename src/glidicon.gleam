@@ -94,15 +94,18 @@ fn calculate_diagonals(bits: List(#(Int, Int))) {
 }
 
 fn draw_image(diagonals: List(#(#(Int, Int), #(Int, Int))), color: RGB) {
+  let defer = fn(binary, image) {
+    egd.destroy(image)
+    binary
+  }
+
   let image = egd.create(250, 250)
   let fill_color = egd.color(color)
 
-  list.each(diagonals, fn(diagonal) {
+  list.fold(diagonals, image, fn(image, diagonal) {
     let #(top_left, bottom_right) = diagonal
     egd.filled_rectangle(image, top_left, bottom_right, fill_color)
   })
-
-  let binary = egd.render(image)
-  egd.destroy(image)
-  binary
+  |> egd.render
+  |> defer(image)
 }
